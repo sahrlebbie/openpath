@@ -2,8 +2,8 @@
 
 clear
 #Lets install some network tools to make sure we can download and run networking/troubleshooting steps.
-echo "#Lets install some network tools to make sure we can download and run networking/troubleshooting steps.
-"
+echo "#Lets install some network tools to make sure we can download and run networking/troubleshooting steps."
+
 sleep 3s
 sudo yum install -y tcpdump telnet wget
 sudo yum install -y epel-release
