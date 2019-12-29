@@ -7,8 +7,6 @@ echo "#Lets install some network tools to make sure we can download and run netw
 sleep 3s
 sudo yum install -y tcpdump telnet wget
 sudo yum install -y epel-release
-sudo yum install nginx
-sudo systemctl start nginx
 sudo yum install -y git
 
 #End of Package Installations
