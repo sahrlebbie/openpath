@@ -41,17 +41,41 @@ sleep 2s
 echo "We will now start Splunk and then install the openPath app"
 sudo chown -R splunk:splunk /opt/splunk
 sudo -u splunk /opt/splunk/bin/splunk start --accept-license
-sudo -u splunk /opt/splunk/bin/splunk enable boot-start -user splunk
+sudo /opt/splunk/bin/splunk enable boot-start -user splunk
 
 #Now we will instlall the app from GitHub. The directory is saved as openpath in GitHub
 sleep 2s
 echo "We will pull down the openPath app from OpenPath's GitHub Page"
-sleep 4s
+echo "."
+sleep 1s
+echo "..."
+sleep 1s
+echo "....."
+sleep 1s
+echo "........"
+sleep 1s
+echo "........"
+sleep 1s
+sleep 3s
 GITHUB_APP="https://github.com/sahrlebbie/openpath.git"
 sudo git clone $GITHUB_APP
 
 sudo mv /opt/openpath /opt/splunk/etc/apps
 sudo chown -R splunk:splunk /opt/splunk
 
-sudo -u splunk /opt/splunk/bin/splunk start
+sudo -u splunk /opt/splunk/bin/splunk restart
 sudo -u splunk /opt/splunk/bin/splunk status
+
+echo "."
+sleep 1s
+echo "..."
+sleep 1s
+echo "....."
+sleep 1s
+echo "........"
+sleep 1s
+echo "........"
+sleep 1s
+echo "Congratulations, you have a fully functioning Splunk Instance with SSL enabled and using your custom login-page settings"
+echo "Goodbye"
+sleep 2s
