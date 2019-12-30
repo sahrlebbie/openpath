@@ -9,3 +9,5 @@ echo "The following user has been added to OpenPath Prod: $USER"
 sleep 3s
 done
 
+#Now that the users have been added. We are going to disable this script it's input from Splunk.
+sed -i 's/disabled = 0/disabled = 1/g' /opt/splunk/etc/apps/openpath/local/inputs.conf
