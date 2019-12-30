@@ -61,6 +61,7 @@ GITHUB_APP="https://github.com/sahrlebbie/openpath.git"
 sudo git clone $GITHUB_APP
 
 sudo mv /opt/openpath /opt/splunk/etc/apps
+sudo chmod +x /opt/splunk/etc/apps/openpath/bin/*
 sudo chown -R splunk:splunk /opt/splunk
 
 sudo -u splunk /opt/splunk/bin/splunk restart
