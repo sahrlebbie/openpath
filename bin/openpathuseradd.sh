@@ -4,7 +4,7 @@
 
 for USER in $(cat /opt/splunk/etc/apps/openpath/default/user.conf)
 do
-/opt/splunk/bin/splunk add user $USER -password Splunk18! -role admin -auth admin:KrBpqtHnRpswx$$6mQEyzkdrWn!
+/opt/splunk/bin/splunk add user $USER -password Splunk18! -role admin -auth "admin:KrBpqtHnRpswx$$6mQEyzkdrWn!"
 echo "The following user has been added to OpenPath Prod: $USER"
 sleep 3s
 done
