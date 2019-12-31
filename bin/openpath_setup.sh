@@ -25,20 +25,21 @@ usermod -aG wheel splunk
 cd /opt
 sleep 3s
 clear
-echo "Splunk user has been created, we will now pull down the Splunk Image from AWS."
-echo "You should have a link from your Cloud Admin which references what Package to download from your S3 bucket."
-sleep 2s
-echo "Please paste the link now:"
-read AWS_LINK
-sleep 1s
+echo "Splunk user has been created, we will now pull down the Splunk Packages from AWS."
+echo "We are going to hardcode this link in here and change it in AWS and Github should things change..."
+sleep 3s
+
+
+#CHANGE THIS PATH FOR AN UPDATED VERSION 
+SPLUNK_INSTALLATION_PACKAGE="https://publicopenpath.s3.amazonaws.com/splunk-7.3.3-7af3758d0d5e-Linux-x86_64.tar"
 
 #We will save this file as splunk_package.tar since it's essentially a tar file we are dowloading from AWS S3
-curl $AWS_LINK > /opt/splunk_package.tar
+curl $SPLUNK_INSTALLATION_PACKAGE > /opt/splunk_package.tar
 tar -xvf /opt/splunk_package.tar
 echo "OK, Splunk is now installed..."
 sleep 2s
 
-echo "We will now start Splunk and then install the openPath app"
+echo "We will now start Splunk and then install the OpenPath app and a few other Splunkbase Apps"
 sudo chown -R splunk:splunk /opt/splunk
 sudo -u splunk /opt/splunk/bin/splunk start --accept-license
 sudo /opt/splunk/bin/splunk enable boot-start -user splunk
@@ -57,15 +58,43 @@ sleep 1s
 echo "........"
 sleep 1s
 sleep 3s
-GITHUB_APP="https://github.com/sahrlebbie/openpath.git"
-sudo git clone $GITHUB_APP
+OPENPATH_APP="https://github.com/sahrlebbie/openpath.git"
+sudo git clone $OPENPATH_APP
 
 sudo mv /opt/openpath /opt/splunk/etc/apps
 sudo chmod +x /opt/splunk/etc/apps/openpath/bin/*
-sudo chown -R splunk:splunk /opt/splunk
+
+#Moving to apps dorectory for staging of Splunkbase apps
+cd /opt/splunk/etc/apps/
+
+#Next we will install the Palo Alto Add-on
+PALO_ALTO_ADD_ON="https://publicopenpath.s3.amazonaws.com/palo-alto-networks-add-on-for-splunk_611.tar"
+curl $PALO_ALTO_ADD_ON > palo-alto-networks-add-on-for-splunk_611.tar
+
+#Next we will install the AWS Add-on
+AWS_ADD_ON="https://publicopenpath.s3.amazonaws.com/splunk-add-on-for-amazon-web-services_461.tar"
+curl $AWS_ADD_ON > splunk-add-on-for-amazon-web-services_461.tar
+
+#Next we will install the Unix/Linux Add-on
+UNIX_LINUX_ADD_ON="https://publicopenpath.s3.amazonaws.com/splunk-add-on-for-unix-and-linux_700.tar"
+curl $UNIX_LINUX_ADD_ON > splunk-add-on-for-unix-and-linux_700.tar
+
+tar -xvf  palo-alto-networks-add-on-for-splunk_611.tar
+tar -xvf splunk-add-on-for-amazon-web-services_461.tar
+tar -xvf splunk-add-on-for-unix-and-linux_700.tar
+
+#Changing ownership to splunk
+sudo chown -R splunk:splunk /opt/splunk*
 
 sudo -u splunk /opt/splunk/bin/splunk restart
 sudo -u splunk /opt/splunk/bin/splunk status
+
+
+#Now let's create a backup directory for our installed apps/add-ons and move the apps/add-ons there for historical/audit purposes.
+sudo mkdir /opt/splunk_installed_apps_addons
+sudo mv *.tar /opt/splunk_installed_apps_addons/
+
+sudo chown -R splunk:splunk /opt/splunk*
 
 echo "."
 sleep 1s
