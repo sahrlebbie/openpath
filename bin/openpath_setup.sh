@@ -41,7 +41,7 @@ sleep 2s
 
 echo "We will now start Splunk and then install the OpenPath app and a few other Splunkbase Apps"
 sudo chown -R splunk:splunk /opt/splunk
-sudo -u splunk /opt/splunk/bin/splunk start --accept-license
+sudo -u splunk /opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt --gen-and-print-passwd
 sudo /opt/splunk/bin/splunk enable boot-start -user splunk
 
 #Now we will instlall the app from GitHub. The directory is saved as openpath in GitHub
