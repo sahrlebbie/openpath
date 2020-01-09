@@ -1,15 +1,21 @@
 #!/bin/bash
 
 clear
-#Lets install some network tools to make sure we can download and run networking/troubleshooting steps.
+#Lets install some network tools to make sure we can download and run networking/troubleshooting steps. Some of these tools may already be installed.
+#######################################################################################################
+#########GIT and WGET INSTALLATION or PRE-INSTALLATION IS A MUST FOR THIS SCRIPT TO SUCCEED############
+#######################################################################################################
 echo "#Lets install some network tools to make sure we can download and run networking/troubleshooting steps."
 sleep 3s
 sudo yum install -y tcpdump telnet wget
 sudo yum install -y epel-release
-sudo yum install -y git
+sudo yum install -y git 
 
 #End of Package Installations
 
+#######################################################################################################
+#####################START OF SPLUNK INSTALLATIONS#####################################################
+#######################################################################################################
 sleep 4s
 clear
 echo "Okay, now we will start with the Splunk Installations by adding the users and dowloading the Splunk 8.0.1 Tar package"
@@ -77,13 +83,18 @@ sleep 1s
 echo "........"
 sleep 1s
 sleep 3s
-IMOTECH_APP="https://github.com/sahrlebbie/imotech.git"
+IMOTECH_APP="https://github.com/sahrlebbie/imotech_secops.git"
 sudo git clone $IMOTECH_APP
 
 sudo mv /opt/imotech_secops /opt/splunk/etc/apps
 
 #Moving to apps dorectory for staging of Splunkbase apps
 cd /opt/splunk/etc/apps/
+
+#######################################################################################################
+#####################CUSTOM APP INSTALLATIONS##########################################################
+#######################################################################################################
+#Custom Apps Installation. These are OPTIONAL. Comment this out if you do NOT want these apps installed on your Splunk Instance.
 
 #Next we will install the Palo Alto Add-on
 PALO_ALTO_ADD_ON="https://publicopenpath.s3.amazonaws.com/palo-alto-networks-add-on-for-splunk_611.tar"
