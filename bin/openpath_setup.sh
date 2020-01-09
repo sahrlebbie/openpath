@@ -62,7 +62,25 @@ OPENPATH_APP="https://github.com/sahrlebbie/openpath.git"
 sudo git clone $OPENPATH_APP
 
 sudo mv /opt/openpath /opt/splunk/etc/apps
-sudo chmod +x /opt/splunk/etc/apps/openpath/bin/*
+
+#Now we will instlall the ImoTech app from GitHub. The directory is saved as imotech_secops in GitHub
+sleep 2s
+echo "We will pull down the ImoTech app from OpenPath's GitHub Page"
+echo "."
+sleep 1s
+echo "..."
+sleep 1s
+echo "....."
+sleep 1s
+echo "........"
+sleep 1s
+echo "........"
+sleep 1s
+sleep 3s
+IMOTECH_APP="https://github.com/sahrlebbie/imotech.git"
+sudo git clone $IMOTECH_APP
+
+sudo mv /opt/imotech_secops /opt/splunk/etc/apps
 
 #Moving to apps dorectory for staging of Splunkbase apps
 cd /opt/splunk/etc/apps/
@@ -106,6 +124,6 @@ echo "........"
 sleep 1s
 echo "........"
 sleep 1s
-echo "Congratulations, you have a fully functioning Splunk Instance with SSL enabled and using your custom login-page settings"
+echo "Congratulations, you have a fully functioning Splunk Instance with SSL(Splunk default cert-so please change!!) enabled and using your custom login-page settings"
 echo "Goodbye"
 sleep 2s
