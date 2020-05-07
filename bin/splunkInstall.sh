@@ -63,7 +63,7 @@ sudo tar -xvf /tmp/splunk-8.0.3-a6754d8441bf-Linux-x86_64.tgz -C /opt >> /tmp/sp
 sudo chown -R splunk:splunk /opt/splunk/
 sudo -u splunk /opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt --seed-passwd $PASSWORD
 sudo -u splunk /opt/splunk/bin/splunk status >> /tmp/splunkInstall.txt
-sudo -u splunk /opt/splunk/bin/splunk enable listen 9997 >> /tmp/splunkInstall.txt
+sudo -u splunk /opt/splunk/bin/splunk enable listen 9997 -auth $USERNAME:$PASSWORD >> /tmp/splunkInstall.txt
 
 #Now let's make sure we enter the correct server name and hostname resporting for Splunk in the UI.
 echo "What would you like to call this server?"
