@@ -35,11 +35,13 @@ then
 echo "First, lets set your Splunk Username & Password for the Splunk Application User!"
 sleep 1s
 echo "This is not for the OS user, that will be next!"
-sleep 2s
+sleep 3s
 clear
 echo "So what is the username you would like to set?"
+sleep 1s
 read USERNAME
 echo "So what is the password you would like to use for your admin user?"
+sleep 1s
 read PASSWORD
 
 echo "Now we will create the splunk OS user"
